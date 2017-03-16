@@ -10,6 +10,10 @@ def count_the_paths(grid):
     N = len(grid)
     M = len(grid[0])
 
+    #if starting or ending cell is occupied, return 0
+    if grid[N-1][0] != '0' or grid[0][M-1] != '0':
+        return 0
+
     row = [0] * M
     A = [row[:] for i in range(0, N)]
     
@@ -35,7 +39,7 @@ def count_the_paths(grid):
     
     return A[0][M-1]
 
-a = ["110", "111", "000"]
+a = ["001", "000", "000"]
 print count_the_paths(a)
 
 
