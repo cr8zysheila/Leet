@@ -49,6 +49,9 @@ def processed(text):
 			del word[:]
 		else:
 			pass
+	# don't forget the last word in the buffer
+	if word:
+		wordList.append("".join(word))
 
 
 	return wordList
