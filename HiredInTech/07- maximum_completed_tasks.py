@@ -1,11 +1,11 @@
 '''
 a[1] + a[2] + ... + a[i] + (a[2] - a[1]) + (a[3] - a[2]) + (a[i] - a[i-1])
 =sum(a[1] ...a[i]) + (a[i] - a[1])
-= 2*a[i] - a[1]
 
-greedy doesn't work:
-eg: [1, 7, 8, 9, 10, 11]
-2*10 -1 > 2*11 - 7
+cost(2, i+1) - cost(2, i) = 2*a[i+1] - a[i]
+cost(2, i+1) - cost(1, i) = 2*a[i+1] - a[i] - a[2] > 0
+
+so it has to start from the smallest task
 '''
 
 def maximum_completed_tasks(n, t, task_difficulties):
@@ -15,15 +15,13 @@ def maximum_completed_tasks(n, t, task_difficulties):
     	return 0
 
     summ = task_difficulties[0]
-    start = 0
     num = 1
     for i in range(1, len(task_difficulties)):
-    	summ += task_difficulties[i]
+    	summ += 2*task_difficulties[i] - task_difficulties[i-1]
     	if summ <= t:
     		num += 1
     	else:
-    		summ = summ + task_difficulties[start] - task_difficulties[start + 1]
-    		start += 1
+    		break
 
 
     return num
